@@ -11,6 +11,8 @@ import {
   SearchFillIcon,
 } from './ui/icons';
 import ColorButton from './ui/ColorButton';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import Avatar from './ui/Avatar';
 
 const menu = [
   {
@@ -32,6 +34,8 @@ const menu = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const user = session?.user;
 
   return (
     <header className='sticky top-0 py-3 px-8 border-b border-gray-200'>
@@ -48,8 +52,20 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+            {user && (
+              <li>
+                <Link href={`/user/${user.name}`}>
+                  <Avatar image={user.image} />
+                </Link>
+              </li>
+            )}
+            <li>
+              <ColorButton
+                text={session ? 'Sign Out' : 'Sign In'}
+                onClick={session ? signOut : signIn}
+              />
+            </li>
           </ul>
-          <ColorButton text='Sign In' onClick={() => {}} />
         </nav>
       </div>
     </header>
