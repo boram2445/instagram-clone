@@ -1,10 +1,7 @@
-import NextAuth, { DefaultSession } from 'next-auth';
+import { User } from '@/model/user';
 
 declare module 'next-auth' {
-  // defaultSession user type을 그대로 가져가면서 username type추가
   interface Session {
-    user: {
-      username: string;
-    } & DefaultSession['user'];
+    user: User;
   }
 }

@@ -1,7 +1,7 @@
 export default {
+  title: 'Post',
   name: 'post',
   type: 'document',
-  title: 'Post',
   fields: [
     {
       title: 'Author',
@@ -15,7 +15,6 @@ export default {
       type: 'image',
     },
     {
-      //좋아한 사람들의 배열
       title: 'Likes',
       name: 'likes',
       type: 'array',

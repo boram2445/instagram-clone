@@ -1,16 +1,14 @@
-//User데이타 모델
 export default {
   title: 'User',
   name: 'user',
   type: 'document',
+
   fields: [
-    //id
     {
-      title: 'Username', //studio UI에서 보는 이름
-      name: 'username', //실제 데이터베이스에서 접근할 수 있는 이름
-      type: 'string', //데이터의 타입
+      title: 'Username',
+      name: 'username',
+      type: 'string',
     },
-    //사용자 이름
     {
       title: 'Name',
       name: 'name',
@@ -18,7 +16,7 @@ export default {
     },
     {
       title: 'Email',
-      name: 'eamil',
+      name: 'email',
       type: 'string',
     },
     {
@@ -31,7 +29,6 @@ export default {
       name: 'following',
       type: 'array',
       of: [
-        //array에 어떤 타입이 담길건지 명시
         {
           type: 'reference',
           to: [{type: 'user'}],
