@@ -11,7 +11,7 @@ export default function MultiCarousel({
   const responsive = {
     desktop: {
       breakpoint: { max: 4000, min: 576 },
-      items: 8,
+      items: 7,
     },
     mobile: {
       breakpoint: { max: 576, min: 0 },

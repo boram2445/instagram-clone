@@ -1,7 +1,7 @@
 import { client } from './sanity';
 
 //user 데이타 타입
-type OAuthUser = {
+export type OAuthUser = {
   id: string;
   email: string;
   name: string;

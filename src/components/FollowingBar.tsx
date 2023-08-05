@@ -2,7 +2,6 @@
 
 import { DetailUser } from '@/model/user';
 import Link from 'next/link';
-
 import useSWR from 'swr';
 import Avatar from './ui/Avatar';
 import { PropagateLoader } from 'react-spinners';
@@ -10,11 +9,7 @@ import MultiCarousel from './MultiCarousel';
 
 export default function FollowingBar() {
   const { data, error, isLoading: loading } = useSWR<DetailUser>('/api/me');
-  const users = data?.following && [
-    ...data?.following,
-    ...data?.following,
-    ...data?.following,
-  ];
+  const users = data?.following;
 
   return (
     <section className='min-h-[90px] p-4 flex justify-center items-center shadow-sm shadow-neutral-300 mb-4 rounded-lg overflow-x-auto'>

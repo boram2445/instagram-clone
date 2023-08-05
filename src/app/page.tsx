@@ -15,11 +15,11 @@ export default async function HomePage() {
 
   return (
     <section className='flex flex-col gap-8 md:flex-row '>
-      <div className='w-full md:w-3/4'>
+      <div className='w-full md:w-2/3'>
         <FollowingBar />
         <PostList />
       </div>
-      <div className='w-full md:w-1/4'>
+      <div className='w-full md:w-1/3'>
         <SideBar user={user} />
       </div>
     </section>

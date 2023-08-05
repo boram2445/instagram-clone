@@ -22,9 +22,9 @@ export default function RootLayout({
     <html lang='en'>
       <body className={openSans.className}>
         <AuthContext>
-          <div className='min-h-full max-w-[850px] mx-auto'>
+          <div className='min-h-full max-w-[850px] mx-auto flex flex-col'>
             <Navbar />
-            <main className='py-5 px-5 md:px-0'>
+            <main className='grow py-5 px-5 md:px-2 bg-neutral-50'>
               <SWRConfigContext>{children}</SWRConfigContext>
             </main>
           </div>
