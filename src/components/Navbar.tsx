@@ -38,7 +38,7 @@ export default function Navbar() {
   const user = session?.user;
 
   return (
-    <header className='sticky top-0 py-3 px-8 border-b border-gray-200'>
+    <header className='sticky top-0 py-3 px-8 border-b border-gray-200 bg-white'>
       <div className='max-w-screen-xl mx-auto flex justify-between items-center'>
         <Link href='/'>
           <h1 className='text-2xl font-bold cursor-pointer'>Instagram</h1>

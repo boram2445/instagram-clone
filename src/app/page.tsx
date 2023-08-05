@@ -14,12 +14,12 @@ export default async function HomePage() {
   }
 
   return (
-    <section className='flex flex-col md:flex-row'>
-      <div className='grow'>
+    <section className='flex flex-col gap-8 md:flex-row '>
+      <div className='w-full md:w-3/4'>
         <FollowingBar />
         <PostList />
       </div>
-      <div className='basis-1/4'>
+      <div className='w-full md:w-1/4'>
         <SideBar user={user} />
       </div>
     </section>
