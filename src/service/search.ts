@@ -1,4 +1,4 @@
-import { ProfileUser } from '@/model/user';
+import { SearchUser } from '@/model/user';
 import { client } from './sanity';
 
 export async function searchUser(keyword?: string) {
@@ -17,7 +17,7 @@ export async function searchUser(keyword?: string) {
         }
     `
     )
-    .then((users: ProfileUser[]) =>
+    .then((users: SearchUser[]) =>
       users.map((user) => ({
         ...user,
         following: user.following ?? 0,

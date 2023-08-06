@@ -1,4 +1,4 @@
-type AvartarSize = 'small' | 'medium' | 'big';
+type AvartarSize = 'small' | 'medium' | 'big' | 'max';
 
 type Props = {
   image?: string | null;
@@ -42,5 +42,7 @@ function getSizeStyle(size: AvartarSize): string {
       return 'w-12 h-12';
     case 'big':
       return 'w-14 h-14';
+    case 'max':
+      return 'w-[100px] h-[100px]';
   }
 }

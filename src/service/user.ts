@@ -1,3 +1,4 @@
+import { HomeUser, SearchUser, SimpleUser } from '@/model/user';
 import { client } from './sanity';
 
 //user 데이타 타입
@@ -33,4 +34,22 @@ export async function getUserByUsername(username: string) {
       "bookmarks":bookmarks[]->_id
     }`
   );
+}
+
+export async function getUserForProfile(username: string) {
+  return client
+    .fetch(
+      `*[_type=='user' && username == "${username}"][0]{
+      ...,
+      "id":id,
+      "following":count(following),
+      "followers":count(followers),
+      "posts":count(*[_type=="post" && author->username == "${username}"])
+    }`
+    )
+    .then((user) => ({
+      ...user,
+      following: user.following ?? 0,
+      followers: user.followers ?? 0,
+    }));
 }

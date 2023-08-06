@@ -1,6 +1,6 @@
 'use client';
 import useSWR from 'swr';
-import { ProfileUser } from '@/model/user';
+import { SearchUser } from '@/model/user';
 import { FormEvent, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import SearchCard from './SearchCard';
@@ -13,7 +13,7 @@ export default function UserSearch() {
     data: users,
     error,
     isLoading: loading,
-  } = useSWR<ProfileUser[]>(`/api/search/${debouncedKeyword}`);
+  } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

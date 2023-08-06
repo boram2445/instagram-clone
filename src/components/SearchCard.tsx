@@ -1,8 +1,8 @@
-import { ProfileUser } from '@/model/user';
+import { SearchUser } from '@/model/user';
 import Link from 'next/link';
 import Avatar from './ui/Avatar';
 
-export default function SearchCard({ user }: { user: ProfileUser }) {
+export default function SearchCard({ user }: { user: SearchUser }) {
   const { username, name, image, followers, following } = user;
 
   return (
