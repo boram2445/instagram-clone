@@ -20,14 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={openSans.className}>
+      <body className={`${openSans.className} bg-neutral-50 flex flex-col`}>
         <AuthContext>
-          <div className='min-h-full max-w-[850px] mx-auto flex flex-col'>
+          <header className='sticky top-0 py-3 px-8 z-10 bg-white border-b border-gray-200 '>
             <Navbar />
-            <main className='grow py-5 px-5 md:px-2 bg-neutral-50'>
-              <SWRConfigContext>{children}</SWRConfigContext>
-            </main>
-          </div>
+          </header>
+          <main className='max-w-[850px]  mx-auto flex flex-col grow py-5 px-5 md:px-2 flex-1'>
+            <SWRConfigContext>{children}</SWRConfigContext>
+          </main>
         </AuthContext>
       </body>
     </html>

@@ -4,3 +4,6 @@ export { default as SearchIcon } from './SearchIcon';
 export { default as SearchFillIcon } from './SearchFillIcon';
 export { default as PlusIcon } from './PlusIcon';
 export { default as PlusFillIcon } from './PlusFillIcon';
+export { default as BookmarkIcon } from './BookmarkIcon';
+export { default as HeartIcon } from './HeartIcon';
+export { default as SmileIcon } from './SmileIcon';

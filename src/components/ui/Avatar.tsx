@@ -1,6 +1,8 @@
+type AvartarSize = 'small' | 'medium' | 'big';
+
 type Props = {
   image?: string | null;
-  size?: 'small' | 'big';
+  size?: AvartarSize;
   highlight?: boolean;
 };
 
@@ -10,7 +12,9 @@ export default function Avatar({
   highlight = true,
 }: Props) {
   return (
-    <div className={getContainerStyle(size, highlight)}>
+    <div
+      className={`${getContainerStyle(size, highlight)} ${getSizeStyle(size)}`}
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         alt='user profile'
@@ -22,11 +26,21 @@ export default function Avatar({
   );
 }
 
-function getContainerStyle(size: string, highlight: boolean): string {
+function getContainerStyle(size: AvartarSize, highlight: boolean): string {
   const baseStyle = 'rounded-full flex justify-center items-center';
   const highlightStyle = highlight
     ? 'p-0.5 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'
     : '';
-  const sizeStyle = size === 'small' ? 'w-10 h-10' : 'w-14 h-14';
-  return `${baseStyle} ${highlightStyle} ${sizeStyle}`;
+  return `${baseStyle} ${highlightStyle}`;
+}
+
+function getSizeStyle(size: AvartarSize): string {
+  switch (size) {
+    case 'small':
+      return 'w-10 h-10';
+    case 'medium':
+      return 'w-12 h-12';
+    case 'big':
+      return 'w-14 h-14';
+  }
 }
