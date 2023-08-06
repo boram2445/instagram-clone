@@ -4,14 +4,16 @@ import { ProfileUser } from '@/model/user';
 import { FormEvent, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import SearchCard from './SearchCard';
+import useDebounce from '@/hooks/useDebounce';
 
 export default function UserSearch() {
   const [keyword, setKeyword] = useState('');
+  const debouncedKeyword = useDebounce(keyword, 1000);
   const {
     data: users,
     error,
     isLoading: loading,
-  } = useSWR<ProfileUser[]>(`/api/search/${keyword}`);
+  } = useSWR<ProfileUser[]>(`/api/search/${debouncedKeyword}`);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -20,8 +22,6 @@ export default function UserSearch() {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(() => e.target.value);
   };
-
-  console.log(users);
 
   return (
     <section className='w-full flex flex-col items-center'>
