@@ -25,7 +25,7 @@ export default function RootLayout({
           <header className='sticky top-0 py-3 px-8 z-10 bg-white border-b border-gray-200 '>
             <Navbar />
           </header>
-          <main className='max-w-[850px]  mx-auto flex flex-col grow py-5 px-5 md:px-2 flex-1'>
+          <main className='max-w-[850px] w-full mx-auto flex flex-col grow py-5 px-5 md:px-2 flex-1'>
             <SWRConfigContext>{children}</SWRConfigContext>
           </main>
         </AuthContext>
