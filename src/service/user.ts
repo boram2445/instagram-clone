@@ -1,4 +1,3 @@
-import { HomeUser, SearchUser, SimpleUser } from '@/model/user';
 import { client } from './sanity';
 
 //user 데이타 타입

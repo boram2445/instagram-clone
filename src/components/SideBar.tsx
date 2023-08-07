@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react';
 import Avatar from './ui/Avatar';
 import { AuthUser } from '@/model/user';
 

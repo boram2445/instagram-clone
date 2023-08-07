@@ -38,7 +38,7 @@ export default function Navbar() {
   const user = session?.user;
 
   return (
-    <div className=' mx-auto max-w-screen-lg  flex justify-between items-center'>
+    <div className=' mx-auto max-w-screen-lg flex justify-between items-center'>
       <Link href='/'>
         <h1 className='text-2xl font-bold cursor-pointer'>Instagram</h1>
       </Link>
@@ -51,7 +51,7 @@ export default function Navbar() {
           ))}
           {user && (
             <li>
-              <Link href={`/user/${user.name}`}>
+              <Link href={`/user/${user.username}`}>
                 <Avatar image={user.image} />
               </Link>
             </li>
