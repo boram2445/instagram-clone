@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { SimplePost } from '@/model/posts';
-import Avatar from './ui/Avatar';
 import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
 import PostDetail from './PostDetail';
@@ -12,7 +11,7 @@ import PostUserAvatar from './PostUserAvatar';
 
 export default function PostCard({ post }: { post: SimplePost }) {
   const [openModal, setOpenModal] = useState(false);
-  const { userImage, username, image, createdAt, likes, text } = post;
+  const { userImage, username, image } = post;
 
   const handleCloseDetail = () => setOpenModal(false);
 
@@ -28,12 +27,7 @@ export default function PostCard({ post }: { post: SimplePost }) {
           height={400}
           className='w-full object-cover aspect-square'
         />
-        <ActionBar
-          likes={likes}
-          createdAt={createdAt}
-          username={username}
-          text={text}
-        />
+        <ActionBar post={post} />
         <CommentForm />
       </article>
       {openModal && (

@@ -1,16 +1,11 @@
 'use client';
 
-import { SimplePost } from '@/model/posts';
 import { ClipLoader } from 'react-spinners';
-import useSWR from 'swr';
 import PostCard from './PostCard';
+import usePosts from '@/hooks/usePosts';
 
 export default function PostList() {
-  const {
-    data: posts,
-    error,
-    isLoading: loading,
-  } = useSWR<SimplePost[]>('/api/posts');
+  const { posts, isLoading: loading, error } = usePosts();
 
   return (
     <section>

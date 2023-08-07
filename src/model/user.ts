@@ -1,5 +1,6 @@
 //세션상에서 얻을수 있는 사용자 정보
 export type AuthUser = {
+  id: string;
   name: string;
   username: string;
   email: string;

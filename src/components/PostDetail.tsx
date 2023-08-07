@@ -2,13 +2,12 @@ import { FullPost, SimplePost } from '@/model/posts';
 import Image from 'next/image';
 import ActionBar from './ActionBar';
 import CommentForm from './CommentForm';
-import Avatar from './ui/Avatar';
 import Comment from './Comment';
 import useSWR from 'swr';
 import PostUserAvatar from './PostUserAvatar';
 
 export default function PostDetail({ post }: { post: SimplePost }) {
-  const { userImage, username, image, createdAt, likes, text, id } = post;
+  const { userImage, username, image, id } = post;
   const { data } = useSWR<FullPost>(`/api/posts/${id}`);
   const comments = data?.comments;
   return (
@@ -32,7 +31,7 @@ export default function PostDetail({ post }: { post: SimplePost }) {
           </ul>
         </div>
         <div>
-          <ActionBar likes={likes} createdAt={createdAt} />
+          <ActionBar post={post} />
           <CommentForm />
         </div>
       </div>
