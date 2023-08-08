@@ -1,19 +1,18 @@
 'use client';
 
-import { HomeUser } from '@/model/user';
 import Link from 'next/link';
-import useSWR from 'swr';
 import Avatar from './ui/Avatar';
 import { PropagateLoader } from 'react-spinners';
 import MultiCarousel from './MultiCarousel';
+import useMe from '@/hooks/useMe';
 
 export default function FollowingBar() {
-  const { data, error, isLoading: loading } = useSWR<HomeUser>('/api/me');
-  const users = data?.following;
+  const { user, isLoading, error } = useMe();
+  const users = user?.following;
 
   return (
     <section className='min-h-[90px] p-4 flex justify-center items-center shadow-sm shadow-neutral-300 mb-4 rounded-lg overflow-x-auto'>
-      {loading ? (
+      {isLoading ? (
         <PropagateLoader size={8} color='red' />
       ) : (
         (!users || users.length === 0) && <p>{`You don't have following`}</p>

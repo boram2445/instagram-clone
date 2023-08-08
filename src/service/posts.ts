@@ -97,3 +97,23 @@ export async function dislikePost(postId: string, userId: string) {
     .unset([`likes[_ref=="${userId}"]`])
     .commit();
 }
+
+export async function addbookmarkPost(userId: string, postId: string) {
+  return client
+    .patch(userId) //
+    .setIfMissing({ bookmarks: [] })
+    .append('bookmarks', [
+      {
+        _ref: postId,
+        _type: 'reference',
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true });
+}
+
+export async function removeBookmarkPost(userId: string, postId: string) {
+  return client
+    .patch(userId)
+    .unset([`bookmarks[_ref=="${postId}"]`])
+    .commit();
+}

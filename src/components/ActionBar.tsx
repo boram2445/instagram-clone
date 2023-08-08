@@ -7,9 +7,9 @@ import {
 } from './ui/icons';
 import usePosts from '@/hooks/usePosts';
 import { parseDate } from '@/util/date';
-import { useSession } from 'next-auth/react';
 import { SimplePost } from '@/model/posts';
 import ToggleButton from './ui/ToggleButton';
+import useMe from '@/hooks/useMe';
 
 type Props = {
   post: SimplePost;
@@ -17,15 +17,18 @@ type Props = {
 
 export default function ActionBar({ post }: Props) {
   const { likes, text, username, createdAt } = post;
-  const { data: session } = useSession();
-  const user = session?.user;
-  const liked = user ? likes.includes(user.username) : false;
-
-  const [bookmarked, setBookmarked] = useState(false);
+  const { user, setBookmark } = useMe();
   const { setLike } = usePosts();
 
+  const liked = user ? likes.includes(user.username) : false;
+  const bookmarked = user?.bookmarks.includes(post.id) ?? false;
+
   const handleLike = (like: boolean) => {
-    if (user) setLike(post, user.username, like);
+    user && setLike(post, user.username, like);
+  };
+
+  const handleBookmark = (bookmark: boolean) => {
+    user && setBookmark(post.id, bookmark);
   };
   return (
     <>
@@ -38,7 +41,7 @@ export default function ActionBar({ post }: Props) {
         />
         <ToggleButton
           toggled={bookmarked}
-          onToggle={setBookmarked}
+          onToggle={handleBookmark}
           onIcon={<BookmarkFillIcon />}
           offIcon={<BookmarkIcon />}
         />
