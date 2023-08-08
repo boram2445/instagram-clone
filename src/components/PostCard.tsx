@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { SimplePost } from '@/model/posts';
-import CommentForm from './CommentForm';
+import { Comment, SimplePost } from '@/model/posts';
 import ActionBar from './ActionBar';
 import PostDetail from './PostDetail';
 import ModalContainer from './ui/ModalContainer';
@@ -15,8 +14,7 @@ export default function PostCard({ post }: { post: SimplePost }) {
   const { userImage, username, image, text, comments } = post;
   const { postComment } = usePosts();
 
-  const handleCloseDetail = () => setOpenModal(false);
-  const handlePostComment = (comment: string) => {
+  const handlePostComment = (comment: Comment) => {
     postComment(post, comment);
   };
 
@@ -32,28 +30,23 @@ export default function PostCard({ post }: { post: SimplePost }) {
           height={400}
           className='w-full object-cover aspect-square'
         />
-        <ActionBar post={post}>
-          <>
-            {
-              <p>
-                <span className='font-bold mr-1'>{username}</span>
-                {text}
-              </p>
-            }
-            {comments > 1 && (
-              <button
-                onClick={() => setOpenModal(true)}
-                className='block text-orange-500 font-semibold hover:underline cursor-pointer'
-              >
-                View all {comments} comments
-              </button>
-            )}
-          </>
+        <ActionBar post={post} onComment={handlePostComment}>
+          <p>
+            <span className='font-bold mr-1'>{username}</span>
+            {text}
+          </p>
+          {comments > 1 && (
+            <button
+              onClick={() => setOpenModal(true)}
+              className='block text-orange-500 font-semibold hover:underline cursor-pointer'
+            >
+              View all {comments} comments
+            </button>
+          )}
         </ActionBar>
-        <CommentForm onPostCommet={handlePostComment} />
       </article>
       {openModal && (
-        <ModalContainer onClose={handleCloseDetail}>
+        <ModalContainer onClose={() => setOpenModal(false)}>
           <PostDetail post={post} />
         </ModalContainer>
       )}
