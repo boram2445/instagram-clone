@@ -5,21 +5,36 @@ import CommentForm from './CommentForm';
 import Comment from './Comment';
 import useSWR from 'swr';
 import PostUserAvatar from './PostUserAvatar';
+import useFullPost from '@/hooks/useFullPost';
+import useMe from '@/hooks/useMe';
 
 export default function PostDetail({ post }: { post: SimplePost }) {
-  const { userImage, username, image, id } = post;
-  const { data } = useSWR<FullPost>(`/api/posts/${id}`);
+  const { userImage, username, image } = post;
+  const { post: data, postComment } = useFullPost(post.id);
+  const { user } = useMe();
   const comments = data?.comments;
+
+  const handlePostComment = (comment: string) => {
+    user &&
+      postComment({
+        comment,
+        username: user.username,
+        image: user.image || '',
+      });
+  };
+
   return (
-    <section className='w-[400px] md:w-[900px] flex flex-col md:flex-row bg-white'>
-      <Image
-        src={image}
-        alt={`photo by ${username}`}
-        width={400}
-        height={400}
-        className='object-cover aspect-square basis-3/5'
-      />
-      <div className='basis-2/5 flex flex-col'>
+    <section className='flex w-5/6 h-3/5 bg-white'>
+      <div className='relative basis-3/5'>
+        <Image
+          src={image}
+          alt={`photo by ${username}`}
+          priority
+          fill
+          className='650px object-cover'
+        />
+      </div>
+      <div className='w-full basis-2/5 flex flex-col'>
         <div className='flex-1'>
           <PostUserAvatar image={userImage} username={username} />
           <ul className='p-3 border-t border-gray-300 overflow-y-auto'>
@@ -32,7 +47,7 @@ export default function PostDetail({ post }: { post: SimplePost }) {
         </div>
         <div>
           <ActionBar post={post} />
-          <CommentForm />
+          <CommentForm onPostCommet={handlePostComment} />
         </div>
       </div>
     </section>

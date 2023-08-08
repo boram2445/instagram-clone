@@ -117,3 +117,20 @@ export async function removeBookmarkPost(userId: string, postId: string) {
     .unset([`bookmarks[_ref=="${postId}"]`])
     .commit();
 }
+
+export async function addCommentPost(
+  userId: string,
+  postId: string,
+  comment: string
+) {
+  return client
+    .patch(postId)
+    .setIfMissing({ comments: [] })
+    .append('comments', [
+      {
+        comment,
+        author: { _ref: userId, _type: 'reference' },
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true });
+}

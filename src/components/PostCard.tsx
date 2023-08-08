@@ -8,12 +8,17 @@ import ActionBar from './ActionBar';
 import PostDetail from './PostDetail';
 import ModalContainer from './ui/ModalContainer';
 import PostUserAvatar from './PostUserAvatar';
+import usePosts from '@/hooks/usePosts';
 
 export default function PostCard({ post }: { post: SimplePost }) {
   const [openModal, setOpenModal] = useState(false);
-  const { userImage, username, image } = post;
+  const { userImage, username, image, text, comments } = post;
+  const { postComment } = usePosts();
 
   const handleCloseDetail = () => setOpenModal(false);
+  const handlePostComment = (comment: string) => {
+    postComment(post, comment);
+  };
 
   return (
     <>
@@ -27,8 +32,25 @@ export default function PostCard({ post }: { post: SimplePost }) {
           height={400}
           className='w-full object-cover aspect-square'
         />
-        <ActionBar post={post} />
-        <CommentForm />
+        <ActionBar post={post}>
+          <>
+            {
+              <p>
+                <span className='font-bold mr-1'>{username}</span>
+                {text}
+              </p>
+            }
+            {comments > 1 && (
+              <button
+                onClick={() => setOpenModal(true)}
+                className='block text-orange-500 font-semibold hover:underline cursor-pointer'
+              >
+                View all {comments} comments
+              </button>
+            )}
+          </>
+        </ActionBar>
+        <CommentForm onPostCommet={handlePostComment} />
       </article>
       {openModal && (
         <ModalContainer onClose={handleCloseDetail}>
