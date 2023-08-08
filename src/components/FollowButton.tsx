@@ -6,7 +6,7 @@ import { ProfileUser } from '@/model/user';
 type Prop = { user: ProfileUser };
 
 export default function FollowButton({ user }: Prop) {
-  const { user: loggedInUser } = useMe();
+  const { user: loggedInUser, toggleFollow } = useMe();
 
   const showButton = loggedInUser && loggedInUser.username !== user.username;
   const following =
@@ -14,12 +14,13 @@ export default function FollowButton({ user }: Prop) {
     loggedInUser.following.find((item) => item.username === user.username);
 
   const text = following ? 'Unfollow' : 'Follow';
+  const handleFollow = () => toggleFollow(user.id, !Boolean(following));
 
   return (
     <>
       {showButton && (
         <button
-          onClick={() => {}}
+          onClick={handleFollow}
           className={`py-0.5 px-3 ${
             following ? 'bg-orange-500' : 'bg-green-500'
           } rounded-full text-white hover:brightness-95`}
