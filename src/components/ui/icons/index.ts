@@ -10,3 +10,4 @@ export { default as HeartIcon } from './HeartIcon';
 export { default as HeartFillIcon } from './HeartFillIcon';
 export { default as SmileIcon } from './SmileIcon';
 export { default as PostIcon } from './PostIcon';
+export { default as FilesIcon } from './FilesIcon';
