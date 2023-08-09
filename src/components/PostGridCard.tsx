@@ -37,6 +37,7 @@ export default function PostGridCard({ post, priority }: Props) {
           sizes='650px'
           className='object-cover'
           onClick={handleOpenPost}
+          priority={priority}
         />
       </div>
       {openModal && (
