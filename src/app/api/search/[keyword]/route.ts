@@ -7,7 +7,7 @@ type Context = {
   };
 };
 
-export async function GET(request: Request, context: Context) {
+export async function GET(_: Request, context: Context) {
   return searchUser(context.params.keyword).then((data) =>
     NextResponse.json(data)
   );
